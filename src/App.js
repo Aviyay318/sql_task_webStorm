@@ -10,7 +10,14 @@ class App  extends React.Component{
       idToDelete:"",
       idToAdd:"",
       name:"",
-      phone:""
+      phone:"",
+      idAve:"",
+      average:"",
+      newGrade:"",
+      updateGradeId:"",
+      updateId:"",
+      updateName:"",
+      updatePhone:""
   }
 
     setValue=(key,event)=>{
@@ -39,6 +46,32 @@ class App  extends React.Component{
             }
         )
 
+    }
+    showAverage=()=>{
+        axios.get("http://localhost:9030/show_average?idAve="+this.state.idAve).then(
+
+            response=>{
+                console.log(response.data)
+                this.setState({average:response.data})
+            }
+        )
+    }
+    updateGrade=()=>{
+        axios.get("http://localhost:9030/update_grade?id="+this.state.updateGradeId +
+        "&grade="+this.state.newGrade).then(
+            response=>{
+                console.log(response.data)
+            }
+        )
+
+    }
+    updateStudentDetails=()=>{
+        axios.get("http://localhost:9030/update_student_details?updateId="+this.state.updateId+
+            "&updateName=" + this.state.updateName + "&updatePhone=" +this.state.updatePhone).then(
+            response=>{
+                console.log(response.data)
+            }
+        )
     }
     addStudent=()=>{
         axios.get("http://localhost:9030/add_student?id="+this.state.idToAdd + "&name=" + this.state.name
@@ -90,24 +123,34 @@ class App  extends React.Component{
             <div>
                 <p>update grade by id:</p>
                 <label>Enter student id:</label>
-                <input />
+                <input value={this.state.updateGradeId}
+                       onChange={(event)=>this.setValue("updateGradeId",event)}/>
                 <label>Enter new grade:</label>
-                <input />
+                <input value={this.state.newGrade}
+                       onChange={(event)=>this.setValue("newGrade",event)}/>
+                <button onClick={()=>this.updateGrade()}>update grade</button>
             </div>
             <div>
                 <p>update details by id:</p>
                 <label>Enter student id:</label>
-                <input />
+                <input value={this.state.updateId}
+                       onChange={(event)=>this.setValue("updateId",event)}/>
                 <label>Enter new name:</label>
-                <input />
+                <input value={this.state.updateName}
+                       onChange={(event)=>this.setValue("updateName",event)}/>
                 <label>Enter new phone:</label>
-                <input />
+                <input value={this.state.updatePhone}
+                       onChange={(event)=>this.setValue("updatePhone",event)}/>
+                <button onClick={()=>this.updateStudentDetails()}>update grade</button>
+
             </div>
             <div>
                 <p>Show average:</p>
                 <label>Enter student id:</label>
-                <input />
-                <p>average: </p>
+                <input type={"number"} value={this.state.idAve}
+                onChange={(event)=>this.setValue("idAve",event)}/>
+                <button onClick={()=>this.showAverage()}>Show average</button>
+                <p>average: {this.state.average}</p>
             </div>
         </div>
     );

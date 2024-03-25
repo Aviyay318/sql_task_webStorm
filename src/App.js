@@ -5,7 +5,7 @@ import axios from "axios";
 
 class App  extends React.Component{
   state={
-     courseNumber:"",
+     courseNumberId:"",
       id:"",
       idToDelete:"",
       idToAdd:"",
@@ -25,7 +25,7 @@ class App  extends React.Component{
     }
 
     showCourseStudents=()=>{
-       axios.get("http://localhost:9030/show_course_students?courseNumber="+this.state.courseNumber).then(
+       axios.get("http://localhost:9030/show_course_students?courseNumber="+this.state.courseNumberId).then(
            response=>{
                console.log(response.data)
            }
@@ -88,9 +88,9 @@ class App  extends React.Component{
           <h1>task sql</h1>
            <div>
                <p>Show course student:</p>
-             <input placeholder={"Enter course number"}
-              type={"number"} value={this.state.courseNumber}
-             onChange={(event)=>this.setValue("courseNumber",event)}/> <br/>
+             <input placeholder={"Enter student id"}
+              type={"number"} value={this.state.courseNumberId}
+             onChange={(event)=>this.setValue("courseNumberId",event)}/> <br/>
                <button onClick={()=>this.showCourseStudents()}>show course students</button>
            </div>
           <div>

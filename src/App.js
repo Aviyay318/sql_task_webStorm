@@ -25,7 +25,7 @@ class App  extends React.Component{
     }
 
     showCourseStudents=()=>{
-       axios.get("http://localhost:9030/show_course_students?courseNumber="+this.state.courseNumber).then(
+       axios.get("http://localhost:9030/show_students_in_courses?courseNumber="+this.state.courseNumber).then(
            response=>{
                console.log(response.data)
            }
